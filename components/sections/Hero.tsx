@@ -23,7 +23,7 @@ export default function Hero() {
     >
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-background.jpg?height=1080&width=1920&text=Coffee+Shop+Interior"
+          src="/heroBackground.webp?height=1080&width=1920&text=Coffee+Shop+Interior"
           alt="Coffee shop interior"
           fill
           className="object-cover brightness-[0.85]"

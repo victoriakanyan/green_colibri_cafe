@@ -21,7 +21,7 @@ export default function Gallery() {
       setIsPaused(true)
       setTimeout(() => {
         setIsPaused(false)
-      }, 2000) // Pause 2 seconds after manual scroll
+      }, 2000)
     }
   }
 
@@ -50,12 +50,10 @@ export default function Gallery() {
   }, [isPaused])
 
   const images = [
-    { alt: "Cafe interior" },
-    { alt: "Specialty coffee" },
-    { alt: "Barista at work" },
-    { alt: "Healthy food" },
-    { alt: "Outdoor seating" },
-    { alt: "Coffee preparation" },
+    { src: "/greenColCaf1.webp", alt: "Cafe Interior" },
+    { src: "/greenColCaf2.webp", alt: "Specialty Coffee" },
+    { src: "/greenColCaf3.jpeg", alt: "Barista at Work" },
+    { src: "/greenColCaf4.jpg", alt: "Outdoor Seating" },
   ]
 
   return (
@@ -91,13 +89,13 @@ export default function Gallery() {
                 className="relative min-w-[250px] md:min-w-[300px] aspect-square overflow-hidden rounded-lg flex-shrink-0 group"
               >
                 <Image
-                  src={`/placeholder.svg?height=400&width=400&text=Gallery+Image+${(index % images.length) + 1}`}
+                  src={image.src}
                   alt={image.alt}
                   fill
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="sr-only">View image</span>
+                  <span className="sr-only">{image.alt}</span>
                 </div>
               </div>
             ))}
