@@ -62,6 +62,8 @@ export default function Header() {
 
         {/* Hamburger Toggle */}
         <button
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
           className="md:hidden text-white"
           onClick={() => setMobileMenuOpen((prev) => !prev)}
         >
@@ -83,32 +85,32 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              aria-hidden="true"
             />
 
-            {/* Slide-in Menu (Right) with Glass Effect */}
+            {/* Slide-in Menu */}
             <motion.div
               ref={menuRef}
-              className="fixed top-0 right-0 z-50 h-screen/2 w-32 bg-[linear-gradient(to_bottom,_theme(colors.emerald.950/30)_0%,_theme(colors.emerald.950/90)_50%,_transparent_100%)] px-6 py-24 flex flex-col gap-6"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              className="fixed top-0 right-0 z-50 h-full w-2/3 bg-[linear-gradient(to_bottom,_theme(colors.emerald.950/30)_0%,_theme(colors.emerald.950/90)_65%,_transparent_100%)] px-8 py-24 flex flex-col gap-8"
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              <div className="absolute top-6 right-6">
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-white"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="absolute top-6 right-6 text-white"
+                aria-label="Close menu"
+              >
+                <X className="h-6 w-6" />
+              </button>
 
               {navItems.map((item) => (
                 <Link
                   key={item}
                   href={`#${item}`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-md font-semibold text-white hover:text-lime-300 transition"
+                  className="text-lg font-semibold text-white hover:text-lime-300 transition"
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </Link>

@@ -82,24 +82,24 @@ export default function MenuSection() {
   ];
 
   return (
-    <section id="menu" className="py-20 bg-green-50">
+    <section id="menu" className="py-24 bg-green-50">
       <div className="container px-4 md:px-6">
         <FadeInWhenVisible>
-          <div className="flex flex-col items-center text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-green-800 mb-4">
+          <div className="flex flex-col items-center text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-green-800 mb-4">
               Our Menu
             </h2>
-            <p className="text-gray-600 max-w-2xl">
+            <p className="text-gray-600 max-w-2xl leading-relaxed">
               Discover our selection of specialty coffees and wholesome food,
               crafted with care using the finest ingredients.
             </p>
           </div>
         </FadeInWhenVisible>
 
-        <div className="grid gap-8 md:grid-cols-2 relative">
-          {/* Coffee Menu */}
+        <div className="grid gap-12 md:grid-cols-2 relative">
+          {/* Coffee Section */}
           <FadeInWhenVisible delay={0.2}>
-            <div className="space-y-6">
+            <div className="space-y-8">
               <h3 className="text-xl font-semibold text-green-700 flex items-center gap-2">
                 <Coffee className="h-5 w-5" />
                 Coffee Selection
@@ -109,11 +109,14 @@ export default function MenuSection() {
                 {coffeeMenu.map((item) => (
                   <div
                     key={item.id}
-                    className="relative"
+                    className="relative group"
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
+                    tabIndex={0}
+                    onFocus={() => setHoveredItem(item.id)}
+                    onBlur={() => setHoveredItem(null)}
                   >
-                    <div className="flex justify-between group items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
+                    <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
                       <div className="font-medium text-green-800">
                         {item.title}
                       </div>
@@ -127,7 +130,8 @@ export default function MenuSection() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute left-0 top-full mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-4 z-20"
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                        className="absolute left-0 top-full mt-2 w-72 bg-white border border-gray-200 shadow-xl rounded-lg p-4 z-20"
                       >
                         <div className="relative w-full h-32 rounded-md overflow-hidden mb-3">
                           <Image
@@ -135,9 +139,10 @@ export default function MenuSection() {
                             alt={item.title}
                             fill
                             className="object-cover"
+                            loading="lazy"
                           />
                         </div>
-                        <p className="text-sm text-gray-700">
+                        <p className="text-sm text-gray-700 leading-relaxed">
                           {item.description}
                         </p>
                         <div className="flex items-center gap-2 text-xs text-red-500 mt-2">
@@ -152,9 +157,9 @@ export default function MenuSection() {
             </div>
           </FadeInWhenVisible>
 
-          {/* Food Menu */}
+          {/* Food Section */}
           <FadeInWhenVisible delay={0.4}>
-            <div className="space-y-6">
+            <div className="space-y-8">
               <h3 className="text-xl font-semibold text-green-700 flex items-center gap-2">
                 <Utensils className="h-5 w-5" />
                 Food & Treats
@@ -164,11 +169,14 @@ export default function MenuSection() {
                 {foodMenu.map((item) => (
                   <div
                     key={item.id}
-                    className="relative"
+                    className="relative group"
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
+                    tabIndex={0}
+                    onFocus={() => setHoveredItem(item.id)}
+                    onBlur={() => setHoveredItem(null)}
                   >
-                    <div className="flex justify-between group items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
+                    <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
                       <div className="font-medium text-green-800">
                         {item.title}
                       </div>
@@ -182,7 +190,8 @@ export default function MenuSection() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute left-0 top-full mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-4 z-20"
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                        className="absolute left-0 top-full mt-2 w-72 bg-white border border-gray-200 shadow-xl rounded-lg p-4 z-20"
                       >
                         <div className="relative w-full h-32 rounded-md overflow-hidden mb-3">
                           <Image
@@ -190,9 +199,10 @@ export default function MenuSection() {
                             alt={item.title}
                             fill
                             className="object-cover"
+                            loading="lazy"
                           />
                         </div>
-                        <p className="text-sm text-gray-700">
+                        <p className="text-sm text-gray-700 leading-relaxed">
                           {item.description}
                         </p>
                         <div className="flex items-center gap-2 text-xs text-red-500 mt-2">

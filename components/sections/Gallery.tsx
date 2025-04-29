@@ -100,7 +100,7 @@ export default function Gallery() {
         <FadeInWhenVisible>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-green-800 mb-4">Gallery</h2>
-            <p className="text-gray-600 text-lg max-w-xl mx-auto">
+            <p className="text-gray-600 text-lg max-w-xl mx-auto leading-relaxed">
               Take a peek inside our space and discover the Green Colibri
               experience.
             </p>
@@ -112,42 +112,50 @@ export default function Gallery() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
+          {/* Left Arrow */}
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-br from-white/70 via-white/40 to-transparent hover:bg-white p-2"
             onClick={() => scrollGallery("left")}
           >
-            <ArrowLeft className="h-6 w-6 text-green-700" />
+            <ArrowLeft className="h-7 w-7 text-green-700 transition-transform hover:scale-110" />
           </Button>
 
+          {/* Gallery Images */}
           <div
             ref={galleryRef}
             className="flex gap-6 overflow-x-auto no-scrollbar px-8 touch-pan-x"
-            style={{ WebkitOverflowScrolling: "touch" }}
+            style={{
+              WebkitOverflowScrolling: "touch",
+              scrollSnapType: "x mandatory",
+            }}
           >
             {loopImages.map((image, i) => (
               <div
                 key={i}
                 className="relative min-w-[250px] md:min-w-[300px] aspect-square rounded-xl overflow-hidden flex-shrink-0 group transform transition-transform duration-500 ease-in-out hover:scale-105"
+                style={{ scrollSnapAlign: "start" }}
               >
                 <Image
                   src={image.src}
-                  alt=""
+                  alt="Gallery Image"
                   fill
-                  className="object-cover transition-opacity duration-500 ease-in-out"
+                  className="object-cover transition duration-500 ease-in-out group-hover:brightness-110"
+                  loading="lazy"
                 />
               </div>
             ))}
           </div>
 
+          {/* Right Arrow */}
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-bl from-white/70 via-white/40 to-transparent hover:bg-white p-2"
             onClick={() => scrollGallery("right")}
           >
-            <ArrowRight className="h-6 w-6 text-green-700" />
+            <ArrowRight className="h-7 w-7 text-green-700 transition-transform hover:scale-110" />
           </Button>
         </div>
       </div>
