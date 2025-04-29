@@ -13,8 +13,54 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center bg-green-100 overflow-hidden" // Full screen height back
+      className="relative min-h-screen flex items-center justify-center bg-green-100 overflow-hidden"
     >
+      {/* Coffee Beans Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {Array.from({ length: 20 }).map((_, index) => {
+          const randomLeft = Math.random() * 100; // random horizontal start
+          const randomSize = 24 + Math.random() * 24; // random size between 24px and 48px
+          const randomDuration = 20 + Math.random() * 10; // fall speed
+          const randomDelay = Math.random() * 10; // delay start
+
+          return (
+            <motion.div
+              key={index}
+              className="absolute"
+              style={{
+                top: `-10%`, // always start ABOVE the screen
+                left: `${randomLeft}%`,
+                width: `${randomSize}px`,
+                height: `${randomSize}px`,
+              }}
+              initial={{
+                y: 0,
+                rotate: Math.random() * 360,
+                opacity: 0.7,
+              }}
+              animate={{
+                y: "120vh", // fall down beyond view
+                rotate: Math.random() * 360 + 360,
+              }}
+              transition={{
+                duration: randomDuration,
+                delay: randomDelay,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              <Image
+                src="/coffeeBean.png" // corrected image name
+                alt="Coffee Bean"
+                width={randomSize}
+                height={randomSize}
+                className="opacity-70"
+              />
+            </motion.div>
+          );
+        })}
+      </div>
+
       {/* Blurred Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-green-300 opacity-30 rounded-full blur-3xl" />
@@ -22,12 +68,12 @@ export default function Hero() {
         <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-green-400 opacity-20 rounded-full blur-2xl" />
       </div>
 
-      {/* Content */}
+      {/* Hero Content */}
       <div className="container relative z-10 flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-12 py-24 gap-12">
         {/* Text Content */}
-        <div className="text-left max-w-2xl"> {/* slightly wider */}
+        <div className="text-left max-w-2xl">
           <motion.h1
-            className="text-5xl md:text-7xl font-extrabold text-green-900 leading-tight" // Bigger title
+            className="text-5xl md:text-7xl font-extrabold text-green-900 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -36,7 +82,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="mt-6 text-xl md:text-2xl text-green-800" // Bigger paragraph
+            className="mt-6 text-xl md:text-2xl text-green-800"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -53,7 +99,7 @@ export default function Hero() {
           >
             <Button
               asChild
-              size="lg" // Bigger button
+              size="lg"
               className="bg-green-700 hover:bg-green-800 text-white shadow-lg text-lg px-8 py-4"
             >
               <Link href="#about">
@@ -64,7 +110,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Rotating Image */}
+        {/* Rotating Coffee Cup */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
