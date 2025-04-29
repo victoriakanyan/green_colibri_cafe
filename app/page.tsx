@@ -1,10 +1,10 @@
-import Header from "@/components/layout/Header"
-import Hero from "@/components/sections/Hero"
-import About from "@/components/sections/About"
-import MenuSection from "@/components/sections/MenuSection"
-import Gallery from "@/components/sections/Gallery"
-import Contact from "@/components/sections/Contact"
-import Footer from "@/components/layout/Footer"
+import Header from "@/components/layout/Header";
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+import MenuSection from "@/components/sections/MenuSection";
+import Gallery from "@/components/sections/Gallery";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -19,5 +19,5 @@ export default function Home() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }

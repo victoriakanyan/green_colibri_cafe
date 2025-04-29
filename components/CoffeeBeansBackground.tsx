@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface BeanConfig {
   left: number;
@@ -17,7 +17,15 @@ export default function CoffeeBeansBackground({
 }: {
   count?: number;
 }) {
-  const beans = useMemo(() => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  // Prevent hydration mismatch by delaying render until client
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  const beans: BeanConfig[] = useMemo(() => {
+    if (!hasMounted) return [];
     return Array.from({ length: count }, () => ({
       left: Math.random() * 100,
       size: 24 + Math.random() * 24,
@@ -25,16 +33,17 @@ export default function CoffeeBeansBackground({
       delay: Math.random() * 10,
       rotation: Math.random() * 360,
     }));
-  }, [count]);
+  }, [count, hasMounted]);
+
+  if (!hasMounted) return null;
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       {beans.map((bean, index) => (
         <motion.div
           key={index}
-          className="absolute"
+          className="absolute top-[-10%] will-change-transform"
           style={{
-            top: `-10%`,
             left: `${bean.left}%`,
             width: `${bean.size}px`,
             height: `${bean.size}px`,
@@ -57,10 +66,11 @@ export default function CoffeeBeansBackground({
         >
           <Image
             src="/coffeeBean.png"
-            alt="Coffee Bean"
+            alt="Floating coffee bean"
             width={bean.size}
             height={bean.size}
             className="object-contain"
+            loading="lazy"
           />
         </motion.div>
       ))}

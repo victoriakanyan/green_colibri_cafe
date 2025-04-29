@@ -1,15 +1,11 @@
 "use client";
 
-import CoffeeBeansBackground from "@/components/CoffeeBeansBackground";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import Image from "next/image";
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24 bg-green-50 overflow-hidden">
-      {/* Decorative Coffee Beans Background */}
-      <CoffeeBeansBackground />
-
+    <section id="about" className="relative py-24 bg-green-50 z-10">
       <div className="container px-4 md:px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
