@@ -10,28 +10,28 @@ export default function Gallery() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<number | null>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [isUserScrolling, setIsUserScrolling] = useState(false);
 
-  const scrollSpeed = 0.5; // Adjust for smoother or faster movement
+  const scrollSpeed = 0.3;
 
   const images = [
-    { src: "/greenColCaf1.webp", alt: "Cafe Interior" },
-    { src: "/greenColCaf2.webp", alt: "Specialty Coffee" },
-    { src: "/greenColCaf3.jpeg", alt: "Barista at Work" },
-    { src: "/greenColCaf4.jpg", alt: "Outdoor Seating" },
-    { src: "/greenColCaf5.jpeg", alt: "Coffee and Dessert" },
-    { src: "/greenColCaf6.jpg", alt: "Corner Window View" },
-    { src: "/greenColCaf7.jpeg", alt: "Warm Lighting Inside" },
-    { src: "/greenColCaf8.jpeg", alt: "Latte Art Close-up" },
-    { src: "/greenColCaf9.jpeg", alt: "Green Decor Details" },
-    { src: "/greenColCaf10.jpeg", alt: "Seating Nook" },
-    { src: "/greenColCaf11.jpeg", alt: "Artisanal Pastries" },
-    { src: "/greenColCaf12.jpeg", alt: "Cafe Vibe Evening" },
-    { src: "/greenColCaf13.jpeg", alt: "Espresso in Focus" },
-    { src: "/greenColCaf14.jpg", alt: "Lounge Area" },
-    { src: "/greenColCaf15.jpeg", alt: "Café Signage Outside" },
+    { src: "/greenColCaf1.webp" },
+    { src: "/greenColCaf2.webp" },
+    { src: "/greenColCaf3.jpeg" },
+    { src: "/greenColCaf4.jpg" },
+    { src: "/greenColCaf10.jpeg" },
+    { src: "/greenColCaf5.jpeg" },
+    { src: "/greenColCaf14.jpg" },
+    { src: "/greenColCaf11.jpeg" },
+    { src: "/greenColCaf8.jpeg" },
+    { src: "/greenColCaf9.jpeg" },
+    { src: "/greenColCaf12.jpeg" },
+    { src: "/greenColCaf13.jpeg" },
+    { src: "/greenColCaf7.jpeg" },
+    { src: "/greenColCaf15.jpeg" },
   ];
 
-  const loopImages = [...images, ...images]; // doubled for infinite effect
+  const loopImages = [...images, ...images];
 
   const scrollGallery = (dir: "left" | "right") => {
     if (!galleryRef.current) return;
@@ -52,8 +52,29 @@ export default function Gallery() {
     const gallery = galleryRef.current;
     if (!gallery) return;
 
+    const handleUserScrollStart = () => {
+      setIsUserScrolling(true);
+      setIsPaused(true);
+      gallery.style.scrollSnapType = "x mandatory";
+      gallery.style.scrollBehavior = "smooth";
+    };
+
+    const handleUserScrollEnd = () => {
+      setTimeout(() => {
+        setIsUserScrolling(false);
+        setIsPaused(false);
+      }, 1000);
+    };
+
+    gallery.addEventListener("touchstart", handleUserScrollStart);
+    gallery.addEventListener("mousedown", handleUserScrollStart);
+    gallery.addEventListener("touchend", handleUserScrollEnd);
+    gallery.addEventListener("mouseup", handleUserScrollEnd);
+
     const animate = () => {
-      if (!isPaused) {
+      if (!isPaused && !isUserScrolling) {
+        gallery.style.scrollSnapType = "none";
+        gallery.style.scrollBehavior = "auto";
         gallery.scrollLeft += scrollSpeed;
         if (gallery.scrollLeft >= gallery.scrollWidth / 2) {
           gallery.scrollLeft = 0;
@@ -66,8 +87,12 @@ export default function Gallery() {
 
     return () => {
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      gallery.removeEventListener("touchstart", handleUserScrollStart);
+      gallery.removeEventListener("mousedown", handleUserScrollStart);
+      gallery.removeEventListener("touchend", handleUserScrollEnd);
+      gallery.removeEventListener("mouseup", handleUserScrollEnd);
     };
-  }, [isPaused]);
+  }, [isPaused, isUserScrolling]);
 
   return (
     <section id="gallery" className="py-24 bg-white relative overflow-hidden">
@@ -98,8 +123,8 @@ export default function Gallery() {
 
           <div
             ref={galleryRef}
-            className="flex gap-6 overflow-x-auto no-scrollbar px-8"
-            style={{ scrollbarWidth: "none", scrollBehavior: "auto" }}
+            className="flex gap-6 overflow-x-auto no-scrollbar px-8 touch-pan-x"
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
             {loopImages.map((image, i) => (
               <div
@@ -108,13 +133,10 @@ export default function Gallery() {
               >
                 <Image
                   src={image.src}
-                  alt={image.alt}
+                  alt=""
                   fill
                   className="object-cover transition-opacity duration-500 ease-in-out"
                 />
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-sm font-medium px-2 text-center">
-                  {image.alt}
-                </div>
               </div>
             ))}
           </div>
