@@ -72,9 +72,9 @@ export default function Hero() {
           >
             <Image
               src="/animationCoffeeCup.png"
-              alt="Coffee Cup"
-              width={600}
-              height={600}
+              alt="Coffee Cup1"
+              width={540}
+              height={540}
               className="object-contain"
               priority
             />
