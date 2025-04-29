@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 interface BeanConfig {
   left: number;
@@ -13,19 +13,19 @@ interface BeanConfig {
 }
 
 export default function CoffeeBeansBackground({
-  count = 20,
+  count = 15,
 }: {
   count?: number;
 }) {
   const [hasMounted, setHasMounted] = useState(false);
+  const reduceMotion = useReducedMotion();
 
-  // Prevent hydration mismatch by delaying render until client
   useEffect(() => {
     setHasMounted(true);
   }, []);
 
   const beans: BeanConfig[] = useMemo(() => {
-    if (!hasMounted) return [];
+    if (!hasMounted || reduceMotion) return [];
     return Array.from({ length: count }, () => ({
       left: Math.random() * 100,
       size: 24 + Math.random() * 24,
@@ -33,9 +33,9 @@ export default function CoffeeBeansBackground({
       delay: Math.random() * 10,
       rotation: Math.random() * 360,
     }));
-  }, [count, hasMounted]);
+  }, [count, hasMounted, reduceMotion]);
 
-  if (!hasMounted) return null;
+  if (!hasMounted || reduceMotion) return null;
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -61,11 +61,11 @@ export default function CoffeeBeansBackground({
             duration: bean.duration,
             delay: bean.delay,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
         >
           <Image
-            src="/coffeeBean.png"
+            src="/coffeeBean.webp"
             alt="Floating coffee bean"
             width={bean.size}
             height={bean.size}

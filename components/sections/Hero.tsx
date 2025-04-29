@@ -78,15 +78,15 @@ export default function Hero() {
           transition={{
             repeat: Infinity,
             duration: isMobile ? 50 : 30,
-            ease: "linear",
+            ease: "easeInOut",
           }}
           className={`flex items-center justify-center ${
             isMobile ? "w-64 h-64" : "w-[480px] h-[480px]"
           }`}
-          style={{ transformOrigin: "center center" }}
+          style={{ willChange: "transform" }}
         >
           <Image
-            src="/coffee-cup.png"
+            src="/coffee-cup.webp"
             alt="Rotating coffee cup"
             width={480}
             height={480}
