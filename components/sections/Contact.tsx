@@ -2,7 +2,7 @@
 
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible"
 import { motion } from "framer-motion"
-import { MapPin, Clock, Instagram, Facebook } from "lucide-react"
+import { MapPin, Clock, Phone, Instagram, Facebook } from "lucide-react" // Added Phone
 import Link from "next/link"
 
 export default function Contact() {
@@ -25,7 +25,7 @@ export default function Contact() {
                   <MapPin className="h-5 w-5 text-green-700 mt-0.5" />
                   <div>
                     <h3 className="font-medium">Address</h3>
-                    <p className="text-gray-600">123 Coffee Street, Nicosia, Cyprus</p>
+                    <p className="text-gray-600">Agapinoros, Nicosia, 1056</p>
                   </div>
                 </motion.div>
 
@@ -38,8 +38,22 @@ export default function Contact() {
                   <Clock className="h-5 w-5 text-green-700 mt-0.5" />
                   <div>
                     <h3 className="font-medium">Opening Hours</h3>
-                    <p className="text-gray-600">Monday - Friday: 8:00 AM - 8:00 PM</p>
-                    <p className="text-gray-600">Saturday - Sunday: 9:00 AM - 6:00 PM</p>
+                    <p className="text-gray-600">Monday - Friday: 7:00 AM - 5:00 PM</p>
+                    <p className="text-gray-600">Saturday: 8:00 AM - 3:00 PM</p>
+                    <p className="text-gray-600">Sunday: Closed</p>
+                  </div>
+                </motion.div>
+
+                {/* Phone */}
+                <motion.div
+                  className="flex items-start gap-3"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <Phone className="h-5 w-5 text-green-700 mt-0.5" />
+                  <div>
+                    <h3 className="font-medium">Phone</h3>
+                    <p className="text-gray-600">+357 99299395</p>
                   </div>
                 </motion.div>
 
@@ -47,7 +61,7 @@ export default function Contact() {
                 <div className="flex gap-4 pt-2">
                   <motion.div whileHover={{ scale: 1.2, rotate: 5 }}>
                     <Link
-                      href="https://instagram.com"
+                      href="https://www.instagram.com/green__colibri/"
                       className="text-gray-600 hover:text-green-700 transition-colors"
                     >
                       <Instagram className="h-5 w-5" />
@@ -56,7 +70,7 @@ export default function Contact() {
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.2, rotate: -5 }}>
                     <Link
-                      href="https://facebook.com"
+                      href="https://www.facebook.com/greencolibrispecialtycoffee"
                       className="text-gray-600 hover:text-green-700 transition-colors"
                     >
                       <Facebook className="h-5 w-5" />
@@ -112,8 +126,8 @@ export default function Contact() {
           {/* Google Map */}
           <FadeInWhenVisible delay={0.3}>
             <div className="relative h-[400px] rounded-lg overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26259.99679860495!2d33.34966!3d35.17539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de1767ca494d55%3A0x324c3c807fc4146e!2sNicosia%2C%20Cyprus!5e0!3m2!1sen!2sus!4v1650000000000!5m2!1sen!2sus"
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.778659262123!2d33.3651489!3d35.1621405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de17dea8ef653f%3A0xd37d749ddd7c9c48!2sGreen%20Colibri%20specialty%20coffee!5e0!3m2!1sen!2s!4v1745921602231!5m2!1sen!2s"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -121,7 +135,8 @@ export default function Contact() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Green Colibri Cafe location"
-              />
+            />
+
             </div>
           </FadeInWhenVisible>
         </div>
