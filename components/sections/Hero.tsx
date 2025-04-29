@@ -6,18 +6,18 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import CoffeeBeansBackground from "@/components/CoffeeBeansBackground"; // import the background
+import useIsMobile from "@/hooks/use-mobile";
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center bg-green-100 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-green-100/80 overflow-hidden"
     >
-      {/* Coffee Beans */}
-      <CoffeeBeansBackground />
+      {/* No CoffeeBeans here */}
 
       {/* Blurred Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -71,8 +71,12 @@ export default function Hero() {
         {/* Rotating Coffee Cup */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-          className="w-[300px] h-[300px] md:w-[480px] md:h-[480px] flex items-center justify-center"
+          transition={{
+            repeat: Infinity,
+            duration: isMobile ? 50 : 30,
+            ease: "linear",
+          }}
+          className="w-[280px] h-[280px] md:w-[480px] md:h-[480px] flex items-center justify-center"
           style={{ transformOrigin: "center" }}
         >
           <Image
