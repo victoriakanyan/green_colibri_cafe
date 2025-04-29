@@ -1,75 +1,85 @@
-"use client"
+"use client";
 
-import { useRef, useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-import Image from "next/image"
-import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible"
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 
 export default function Gallery() {
-  const galleryRef = useRef<HTMLDivElement>(null)
-  const animationFrameRef = useRef<number | null>(null)
-  const [isPaused, setIsPaused] = useState(false)
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const scrollGallery = (direction: "left" | "right") => {
-    if (galleryRef.current) {
-      const scrollAmount = 300
-      galleryRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
-      setIsPaused(true)
-      setTimeout(() => {
-        setIsPaused(false)
-      }, 2000)
-    }
-  }
-
-  useEffect(() => {
-    const gallery = galleryRef.current
-    if (!gallery) return
-
-    const scrollSpeed = 1 // pixels per frame
-
-    const scroll = () => {
-      if (!isPaused) {
-        if (gallery.scrollLeft >= gallery.scrollWidth / 2) {
-          gallery.scrollLeft = 0
-        } else {
-          gallery.scrollLeft += scrollSpeed
-        }
-      }
-      animationFrameRef.current = requestAnimationFrame(scroll)
-    }
-
-    animationFrameRef.current = requestAnimationFrame(scroll)
-
-    return () => {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
-    }
-  }, [isPaused])
+  const scrollSpeed = 0.5; // Adjust for smoother or faster movement
 
   const images = [
     { src: "/greenColCaf1.webp", alt: "Cafe Interior" },
     { src: "/greenColCaf2.webp", alt: "Specialty Coffee" },
     { src: "/greenColCaf3.jpeg", alt: "Barista at Work" },
     { src: "/greenColCaf4.jpg", alt: "Outdoor Seating" },
-    { src: "/greenColCaf5.jpeg", alt: "Coffee and Dessert" }, // NEW IMAGE ADDED!
-  ]
+    { src: "/greenColCaf5.jpeg", alt: "Coffee and Dessert" },
+  ];
+
+  const loopImages = [...images, ...images]; // doubled for infinite effect
+
+  // Manual scroll
+  const scrollGallery = (dir: "left" | "right") => {
+    if (!galleryRef.current) return;
+    const amount = 300;
+    galleryRef.current.scrollBy({
+      left: dir === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
+    pauseTemporarily();
+  };
+
+  const pauseTemporarily = () => {
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 2000);
+  };
+
+  // Smooth autoscroll using requestAnimationFrame
+  useEffect(() => {
+    const gallery = galleryRef.current;
+    if (!gallery) return;
+
+    const animate = () => {
+      if (!isPaused) {
+        gallery.scrollLeft += scrollSpeed;
+        if (gallery.scrollLeft >= gallery.scrollWidth / 2) {
+          gallery.scrollLeft = 0;
+        }
+      }
+      frameRef.current = requestAnimationFrame(animate);
+    };
+
+    frameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
+  }, [isPaused]);
 
   return (
-    <section id="gallery" className="py-20 bg-white overflow-hidden relative">
-      <div className="container px-4 md:px-6">
+    <section id="gallery" className="py-24 bg-white relative overflow-hidden">
+      <div className="container px-6 md:px-12">
         <FadeInWhenVisible>
-          <div className="flex flex-col items-center text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-green-800 mb-4">Gallery</h2>
-            <p className="text-gray-600 max-w-2xl">
-              Take a peek inside our cafe and discover the Green Colibri experience.
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-green-800 mb-4">Gallery</h2>
+            <p className="text-gray-600 text-lg max-w-xl mx-auto">
+              Take a peek inside our space and discover the Green Colibri
+              experience.
             </p>
           </div>
         </FadeInWhenVisible>
 
-        <div className="relative">
+        <div
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Left Arrow */}
           <Button
             variant="ghost"
             size="icon"
@@ -79,29 +89,29 @@ export default function Gallery() {
             <ArrowLeft className="h-6 w-6 text-green-700" />
           </Button>
 
+          {/* Scrollable gallery */}
           <div
             ref={galleryRef}
-            className="flex gap-6 overflow-x-auto no-scrollbar px-8 scroll-smooth"
-            style={{ scrollbarWidth: "none", scrollBehavior: "smooth" }}
+            className="flex gap-6 overflow-x-auto no-scrollbar px-8"
+            style={{ scrollbarWidth: "none", scrollBehavior: "auto" }}
           >
-            {[...images, ...images].map((image, index) => (
-              <div
-                key={index}
-                className="relative min-w-[250px] md:min-w-[300px] aspect-square overflow-hidden rounded-lg flex-shrink-0 group"
-              >
+            {loopImages.map((image, i) => (
+              <div className="relative min-w-[250px] md:min-w-[300px] aspect-square rounded-xl overflow-hidden flex-shrink-0 group transform transition-transform duration-500 ease-in-out hover:scale-105">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-opacity duration-500 ease-in-out"
                 />
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="sr-only">{image.alt}</span>
+
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-sm font-medium px-2 text-center">
+                  {image.alt}
                 </div>
               </div>
             ))}
           </div>
 
+          {/* Right Arrow */}
           <Button
             variant="ghost"
             size="icon"
@@ -113,5 +123,5 @@ export default function Gallery() {
         </div>
       </div>
     </section>
-  )
+  );
 }

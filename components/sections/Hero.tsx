@@ -13,46 +13,47 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-green-100"
+      className="relative min-h-screen flex items-center justify-center bg-green-100 overflow-hidden"
     >
-      {/* Blurred shapes */}
-      <div className="absolute inset-0">
-        <div className="absolute top-[-50px] left-[-50px] w-96 h-96 bg-green-300 opacity-50 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[-60px] right-[-60px] w-[500px] h-[500px] bg-green-200 opacity-40 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-green-400 opacity-30 rounded-full blur-2xl"></div>
+      {/* Blurred Background Circles */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-green-300 opacity-30 rounded-full blur-3xl" />
+        <div className="absolute bottom-[-80px] right-[-40px] w-[500px] h-[500px] bg-green-200 opacity-30 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-green-400 opacity-20 rounded-full blur-2xl" />
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 flex items-center justify-between px-6 md:px-12">
-        {/* Left Side Text */}
-        <div className="max-w-lg text-left">
+      <div className="container relative z-10 flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-12 py-24 gap-12">
+        {/* Text Content */}
+        <div className="text-left max-w-xl">
           <motion.h1
-            className="text-5xl md:text-7xl font-extrabold text-green-900 leading-tight"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-4xl md:text-6xl font-extrabold text-green-900 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Green Colibri Cafe
+            Green Colibri Café
           </motion.h1>
 
           <motion.p
-            className="mt-6 text-lg md:text-xl text-green-800/90"
-            initial={{ opacity: 0, y: 20 }}
+            className="mt-4 text-lg md:text-xl text-green-800"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Strictly pet friendly sustainable cafe in the heart of Nicosia
+            A pet-friendly, sustainable café in the heart of Nicosia — where
+            good vibes and green values meet.
           </motion.p>
 
           <motion.div
             className="mt-8"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
             <Button
               asChild
-              className="bg-green-700 hover:bg-green-800 text-white"
+              className="bg-green-700 hover:bg-green-800 text-white shadow-md"
             >
               <Link href="#about">
                 Learn More
@@ -62,24 +63,22 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Side Rotating Image */}
-        <div className="hidden md:block w-1/2 h-[400px] flex items-center justify-center">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="w-[600px] h-[600px] flex items-center justify-center"
-            style={{ transformOrigin: "center center", y: -100, x: 50 }}
-          >
-            <Image
-              src="/coffee-cup.png"
-              alt="Coffee Cup1"
-              width={540}
-              height={540}
-              className="object-contain"
-              priority
-            />
-          </motion.div>
-        </div>
+        {/* Rotating Image */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          className="w-[300px] h-[300px] md:w-[480px] md:h-[480px] flex items-center justify-center"
+          style={{ transformOrigin: "center" }}
+        >
+          <Image
+            src="/coffee-cup.png"
+            alt="Rotating coffee cup"
+            width={480}
+            height={480}
+            className="object-contain"
+            priority
+          />
+        </motion.div>
       </div>
     </section>
   );

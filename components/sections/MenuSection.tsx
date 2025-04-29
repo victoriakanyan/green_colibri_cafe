@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Coffee, Utensils, AlertCircle } from "lucide-react"
-import Image from "next/image"
-import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible"
-import { motion } from "framer-motion"
-import { useState } from "react"
+import { Coffee, Utensils, AlertCircle } from "lucide-react";
+import Image from "next/image";
+import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function MenuSection() {
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const coffeeMenu = [
     {
@@ -42,7 +42,7 @@ export default function MenuSection() {
       allergens: "Contains caffeine",
       image: "/greenColCaf5.jpeg",
     },
-  ]
+  ];
 
   const foodMenu = [
     {
@@ -56,7 +56,8 @@ export default function MenuSection() {
     {
       id: "food-2",
       title: "Avocado Toast",
-      description: "Smashed avocado, cherry tomatoes, and microgreens on sourdough",
+      description:
+        "Smashed avocado, cherry tomatoes, and microgreens on sourdough",
       price: "€6.50",
       allergens: "Contains gluten",
       image: "/greenColCaf10.jpeg",
@@ -64,7 +65,8 @@ export default function MenuSection() {
     {
       id: "food-3",
       title: "Quinoa Salad Bowl",
-      description: "Mixed greens, quinoa, roasted vegetables, and tahini dressing",
+      description:
+        "Mixed greens, quinoa, roasted vegetables, and tahini dressing",
       price: "€8.50",
       allergens: "Contains sesame",
       image: "/greenColCaf8.jpeg",
@@ -77,17 +79,19 @@ export default function MenuSection() {
       allergens: "Contains nuts",
       image: "/greenColCaf10.jpeg",
     },
-  ]
+  ];
 
   return (
     <section id="menu" className="py-20 bg-green-50">
       <div className="container px-4 md:px-6">
         <FadeInWhenVisible>
           <div className="flex flex-col items-center text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-green-800 mb-4">Our Menu</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-green-800 mb-4">
+              Our Menu
+            </h2>
             <p className="text-gray-600 max-w-2xl">
-              Discover our selection of specialty coffees and wholesome food, crafted with care using the finest
-              ingredients.
+              Discover our selection of specialty coffees and wholesome food,
+              crafted with care using the finest ingredients.
             </p>
           </div>
         </FadeInWhenVisible>
@@ -110,8 +114,12 @@ export default function MenuSection() {
                     onMouseLeave={() => setHoveredItem(null)}
                   >
                     <div className="flex justify-between group items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
-                      <div className="font-medium text-green-800">{item.title}</div>
-                      <div className="font-medium">{item.price}</div>
+                      <div className="font-medium text-green-800">
+                        {item.title}
+                      </div>
+                      <div className="font-medium text-green-900">
+                        {item.price}
+                      </div>
                     </div>
 
                     {hoveredItem === item.id && (
@@ -129,7 +137,9 @@ export default function MenuSection() {
                             className="object-cover"
                           />
                         </div>
-                        <p className="text-sm text-gray-700">{item.description}</p>
+                        <p className="text-sm text-gray-700">
+                          {item.description}
+                        </p>
                         <div className="flex items-center gap-2 text-xs text-red-500 mt-2">
                           <AlertCircle className="h-4 w-4" />
                           {item.allergens}
@@ -159,8 +169,12 @@ export default function MenuSection() {
                     onMouseLeave={() => setHoveredItem(null)}
                   >
                     <div className="flex justify-between group items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
-                      <div className="font-medium text-green-800">{item.title}</div>
-                      <div className="font-medium">{item.price}</div>
+                      <div className="font-medium text-green-800">
+                        {item.title}
+                      </div>
+                      <div className="font-medium text-green-900">
+                        {item.price}
+                      </div>
                     </div>
 
                     {hoveredItem === item.id && (
@@ -178,7 +192,9 @@ export default function MenuSection() {
                             className="object-cover"
                           />
                         </div>
-                        <p className="text-sm text-gray-700">{item.description}</p>
+                        <p className="text-sm text-gray-700">
+                          {item.description}
+                        </p>
                         <div className="flex items-center gap-2 text-xs text-red-500 mt-2">
                           <AlertCircle className="h-4 w-4" />
                           {item.allergens}
@@ -193,5 +209,5 @@ export default function MenuSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
