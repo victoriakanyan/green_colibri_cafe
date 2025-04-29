@@ -1,66 +1,85 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] })
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9])
-  const y = useTransform(scrollYProgress, [0, 0.2], [0, 100])
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95])
+  const y = useTransform(scrollYProgress, [0, 0.2], [0, 50])
 
   return (
     <motion.section
       ref={heroRef}
-      className="relative h-[90vh] flex items-center justify-center overflow-hidden"
+      className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-green-100"
       style={{ opacity, scale, y }}
     >
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/heroBackground.webp?height=1080&width=1920&text=Coffee+Shop+Interior"
-          alt="Coffee shop interior"
-          fill
-          className="object-cover brightness-[0.85]"
-          priority
-        />
+      {/* Blurred shapes */}
+      <div className="absolute inset-0">
+        <div className="absolute top-[-50px] left-[-50px] w-96 h-96 bg-green-300 opacity-50 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-60px] right-[-60px] w-[500px] h-[500px] bg-green-200 opacity-40 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-green-400 opacity-30 rounded-full blur-2xl"></div>
       </div>
 
-      <div className="container relative z-10 flex flex-col items-center text-center gap-6 px-4">
-        <motion.h1
-          className="text-4xl md:text-6xl font-bold text-white leading-tight max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Our purpose is to leave a piece of ourselves, our soul, creativity and love
-        </motion.h1>
+      {/* Content */}
+      <div className="container relative z-10 flex items-center justify-between px-6 md:px-12">
+        {/* Left Side Text */}
+        <div className="max-w-lg text-left">
+          <motion.h1
+            className="text-5xl md:text-7xl font-extrabold text-green-900 leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Green Colibri Cafe
+          </motion.h1>
 
-        <motion.p
-          className="text-lg md:text-xl text-white/90 max-w-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          Strictly pet friendly sustainable cafe in the heart of Nicosia
-        </motion.p>
+          <motion.p
+            className="mt-6 text-lg md:text-xl text-green-800/90"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Strictly pet friendly sustainable cafe in the heart of Nicosia
+          </motion.p>
 
+          <motion.div
+            className="mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <Button asChild className="bg-green-700 hover:bg-green-800 text-white">
+              <Link href="#about">
+                Learn More
+                <ChevronDown className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </motion.div>
+        </div>
+
+        {/* Right Side Image */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          className="hidden md:block w-1/2 h-[400px] flex items-center justify-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
         >
-          <Button asChild className="mt-4 bg-green-700 hover:bg-green-800 text-white">
-            <Link href="#about">
-              Learn More
-              <ChevronDown className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <Image
+            src="/animationCoffeeCup.png"
+            alt="Coffee Cup"
+            width={600}
+            height={600}
+            className="object-contain"
+            priority
+          />
         </motion.div>
       </div>
     </motion.section>

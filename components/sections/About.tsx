@@ -44,7 +44,7 @@ export default function About() {
           <FadeInWhenVisible delay={0.2}>
             <div className="relative aspect-square overflow-hidden rounded-lg">
               <Image
-                src="/placeholder.svg?height=600&width=600&text=Barista+Preparing+Coffee"
+                src="/greenColCaf6.jpg?height=600&width=600&text=Barista+Preparing+Coffee"
                 alt="Barista preparing coffee"
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"

@@ -14,15 +14,13 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
-                src="/placeholder.svg?height=32&width=32"
+                src="/greenColLogo.PNG"
                 alt="Green Colibri Logo"
-                width={32}
-                height={32}
+                width={160}
+                height={160}
                 className="rounded-sm"
               />
-              <span className="text-xl font-semibold">Green Colibri</span>
             </Link>
-            <p className="text-green-100 text-sm">Specialty coffee with soul, in the heart of Nicosia.</p>
           </div>
 
           {/* Quick Links */}

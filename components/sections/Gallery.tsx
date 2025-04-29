@@ -54,6 +54,7 @@ export default function Gallery() {
     { src: "/greenColCaf2.webp", alt: "Specialty Coffee" },
     { src: "/greenColCaf3.jpeg", alt: "Barista at Work" },
     { src: "/greenColCaf4.jpg", alt: "Outdoor Seating" },
+    { src: "/greenColCaf5.jpeg", alt: "Coffee and Dessert" }, // NEW IMAGE ADDED!
   ]
 
   return (
