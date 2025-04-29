@@ -39,7 +39,7 @@ export default function CoffeeBeansBackground() {
             }}
           >
             <Image
-              src="/coffeeBean.png"
+              src="/bean.png"
               alt="Coffee Bean"
               width={randomSize}
               height={randomSize}
