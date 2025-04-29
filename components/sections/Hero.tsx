@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
@@ -9,17 +9,11 @@ import Image from "next/image"
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95])
-  const y = useTransform(scrollYProgress, [0, 0.2], [0, 50])
 
   return (
-    <motion.section
+    <section
       ref={heroRef}
       className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-green-100"
-      style={{ opacity, scale, y }}
     >
       {/* Blurred shapes */}
       <div className="absolute inset-0">
@@ -67,24 +61,23 @@ export default function Hero() {
 
         {/* Right Side Rotating Image */}
         <div className="hidden md:block w-1/2 h-[400px] flex items-center justify-center">
-            <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-                className="w-[600px] h-[600px] flex items-center justify-center"
-                style={{ transformOrigin: "center center", y: -100, x: 50 }}
-            >
-                <Image
-                src="/animationCoffeeCup.png"
-                alt="Coffee Cup"
-                width={600}
-                height={600}
-                className="object-contain"
-                priority
-                />
-            </motion.div>
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            className="w-[600px] h-[600px] flex items-center justify-center"
+            style={{ transformOrigin: "center center", y: -100, x: 50 }}
+          >
+            <Image
+              src="/animationCoffeeCup.png"
+              alt="Coffee Cup"
+              width={600}
+              height={600}
+              className="object-contain"
+              priority
+            />
+          </motion.div>
         </div>
-
       </div>
-    </motion.section>
+    </section>
   )
-} 
+}
