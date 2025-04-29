@@ -25,7 +25,7 @@ export default function Header() {
             Green Colibri
           </span>
           <Image
-            src="/greenColbird.png"
+            src="/greenColBird.png"
             alt="Green Colibri Logo"
             width={36}
             height={36}
