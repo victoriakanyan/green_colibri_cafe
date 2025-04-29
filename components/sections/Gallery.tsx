@@ -19,11 +19,20 @@ export default function Gallery() {
     { src: "/greenColCaf3.jpeg", alt: "Barista at Work" },
     { src: "/greenColCaf4.jpg", alt: "Outdoor Seating" },
     { src: "/greenColCaf5.jpeg", alt: "Coffee and Dessert" },
+    { src: "/greenColCaf6.jpg", alt: "Corner Window View" },
+    { src: "/greenColCaf7.jpeg", alt: "Warm Lighting Inside" },
+    { src: "/greenColCaf8.jpeg", alt: "Latte Art Close-up" },
+    { src: "/greenColCaf9.jpeg", alt: "Green Decor Details" },
+    { src: "/greenColCaf10.jpeg", alt: "Seating Nook" },
+    { src: "/greenColCaf11.jpeg", alt: "Artisanal Pastries" },
+    { src: "/greenColCaf12.jpeg", alt: "Cafe Vibe Evening" },
+    { src: "/greenColCaf13.jpeg", alt: "Espresso in Focus" },
+    { src: "/greenColCaf14.jpg", alt: "Lounge Area" },
+    { src: "/greenColCaf15.jpeg", alt: "Café Signage Outside" },
   ];
 
   const loopImages = [...images, ...images]; // doubled for infinite effect
 
-  // Manual scroll
   const scrollGallery = (dir: "left" | "right") => {
     if (!galleryRef.current) return;
     const amount = 300;
@@ -39,7 +48,6 @@ export default function Gallery() {
     setTimeout(() => setIsPaused(false), 2000);
   };
 
-  // Smooth autoscroll using requestAnimationFrame
   useEffect(() => {
     const gallery = galleryRef.current;
     if (!gallery) return;
@@ -79,7 +87,6 @@ export default function Gallery() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Left Arrow */}
           <Button
             variant="ghost"
             size="icon"
@@ -89,21 +96,22 @@ export default function Gallery() {
             <ArrowLeft className="h-6 w-6 text-green-700" />
           </Button>
 
-          {/* Scrollable gallery */}
           <div
             ref={galleryRef}
             className="flex gap-6 overflow-x-auto no-scrollbar px-8"
             style={{ scrollbarWidth: "none", scrollBehavior: "auto" }}
           >
             {loopImages.map((image, i) => (
-              <div className="relative min-w-[250px] md:min-w-[300px] aspect-square rounded-xl overflow-hidden flex-shrink-0 group transform transition-transform duration-500 ease-in-out hover:scale-105">
+              <div
+                key={i}
+                className="relative min-w-[250px] md:min-w-[300px] aspect-square rounded-xl overflow-hidden flex-shrink-0 group transform transition-transform duration-500 ease-in-out hover:scale-105"
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
                   className="object-cover transition-opacity duration-500 ease-in-out"
                 />
-
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-sm font-medium px-2 text-center">
                   {image.alt}
                 </div>
@@ -111,7 +119,6 @@ export default function Gallery() {
             ))}
           </div>
 
-          {/* Right Arrow */}
           <Button
             variant="ghost"
             size="icon"
