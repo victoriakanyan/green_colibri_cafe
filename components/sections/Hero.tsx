@@ -71,7 +71,7 @@ export default function Hero() {
             style={{ transformOrigin: "center center", y: -100, x: 50 }}
           >
             <Image
-              src="./animationCoffeeCup.png"
+              src="/animationCoffeeCup.png"
               alt="Coffee Cup"
               width={600}
               height={600}
