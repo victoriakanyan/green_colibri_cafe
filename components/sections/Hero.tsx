@@ -65,23 +65,26 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Side Image */}
-        <motion.div
-          className="hidden md:block w-1/2 h-[400px] flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <Image
-            src="/animationCoffeeCup.png"
-            alt="Coffee Cup"
-            width={600}
-            height={600}
-            className="object-contain"
-            priority
-          />
-        </motion.div>
+        {/* Right Side Rotating Image */}
+        <div className="hidden md:block w-1/2 h-[400px] flex items-center justify-center">
+            <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+                className="w-[600px] h-[600px] flex items-center justify-center"
+                style={{ transformOrigin: "center center", y: -100, x: 50 }}
+            >
+                <Image
+                src="/animationCoffeeCup.png"
+                alt="Coffee Cup"
+                width={600}
+                height={600}
+                className="object-contain"
+                priority
+                />
+            </motion.div>
+        </div>
+
       </div>
     </motion.section>
   )
-}
+} 
