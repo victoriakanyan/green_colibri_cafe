@@ -13,7 +13,7 @@ interface BeanConfig {
 }
 
 export default function CoffeeBeansBackground({
-  count = 15,
+  count = 20,
 }: {
   count?: number;
 }) {
@@ -59,9 +59,9 @@ export default function CoffeeBeansBackground({
           }}
           transition={{
             duration: bean.duration,
-            delay: bean.delay,
+            delay: 0,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "linear",
           }}
         >
           <Image

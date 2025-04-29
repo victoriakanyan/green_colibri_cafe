@@ -1,120 +1,106 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
-import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
-const navItems = ["about", "menu", "gallery", "contact"];
+const navItems = [
+  { name: "About", href: "#about" },
+  { name: "Menu", href: "#menu" },
+  { name: "Gallery", href: "#gallery" },
+  { name: "Contact", href: "#contact" },
+];
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileMenuOpen(false);
-    };
-    document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setMobileMenuOpen(false);
-      }
-    };
-    if (mobileMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [mobileMenuOpen]);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-emerald-900/60 backdrop-blur-lg shadow-md">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center gap-2">
+          <span className="text-green-900 text-lg font-bold tracking-wide hidden sm:inline">
+            Green Colibri
+          </span>
           <Image
-            src="/greenColLogo2.PNG"
+            src="/greenColbird.png"
             alt="Green Colibri Logo"
-            width={40}
-            height={40}
-            priority
+            width={36}
+            height={36}
             className="object-contain"
           />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-10">
+        <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
-              key={item}
-              href={`#${item}`}
-              className="relative text-base text-white font-medium hover:text-lime-300 transition duration-200"
+              key={item.name}
+              href={item.href}
+              className="text-green-800 hover:text-green-600 transition text-sm font-medium"
             >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
+              {item.name}
             </Link>
           ))}
         </nav>
 
-        {/* Hamburger Toggle */}
+        {/* Mobile Menu Button */}
         <button
-          aria-label="Toggle navigation menu"
-          aria-expanded={mobileMenuOpen}
-          className="md:hidden text-white"
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          className="md:hidden text-green-900"
+          onClick={() => setIsOpen(true)}
+          aria-label="Open mobile menu"
         >
-          {mobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
+          <Menu className="h-6 w-6" />
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu with blur/dimmed backdrop */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {isOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop behind the panel */}
             <motion.div
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 z-40 bg-green-900/40 transition-opacity"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              aria-hidden="true"
+              onClick={() => setIsOpen(false)}
             />
 
-            {/* Slide-in Menu */}
+            {/* Slide-in nav panel */}
             <motion.div
-              ref={menuRef}
-              className="fixed top-0 right-0 z-50 h-full w-2/3 bg-[linear-gradient(to_bottom,_theme(colors.emerald.950/30)_0%,_theme(colors.emerald.950/90)_65%,_transparent_100%)] px-8 py-24 flex flex-col gap-8"
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
+              className="fixed inset-y-0 right-0 z-50 w-[40%] max-w-sm bg-green-900 text-white flex flex-col px-6 py-8"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="absolute top-6 right-6 text-white"
-                aria-label="Close menu"
-              >
-                <X className="h-6 w-6" />
-              </button>
-
-              {navItems.map((item) => (
-                <Link
-                  key={item}
-                  href={`#${item}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-semibold text-white hover:text-lime-300 transition"
+              {/* Top Bar */}
+              <div className="flex items-center justify-between mb-50">
+                <Link href="/" className="flex items-center gap-1"></Link>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Close menu"
                 >
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </Link>
-              ))}
+                  <X className="h-6 w-6 text-white" />
+                </button>
+              </div>
+
+              {/* Nav Items */}
+              <nav className="flex flex-col gap-2 mt-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="bg-green-950/90 px-4 py-3 rounded-md text-white text-base font-medium hover:bg-green-700 transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
             </motion.div>
           </>
         )}
