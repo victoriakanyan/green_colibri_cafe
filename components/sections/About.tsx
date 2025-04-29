@@ -16,7 +16,7 @@ export default function About() {
                 Our Story
               </h2>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Green Colibri Café was born from a love of specialty coffee and
+                Green Colibri Cafe was born from a love of specialty coffee and
                 a deep commitment to sustainability. Nestled in the heart of
                 Nicosia, we've created a welcoming space for coffee lovers and
                 conscious consumers alike.

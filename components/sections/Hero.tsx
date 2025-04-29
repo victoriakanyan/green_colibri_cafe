@@ -32,7 +32,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Green Colibri Café
+            Green Colibri Cafe
           </motion.h1>
 
           <motion.p
@@ -41,7 +41,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            A pet-friendly, sustainable café in the heart of Nicosia — where
+            A pet-friendly, sustainable cafe in the heart of Nicosia — where
             good vibes and green values meet.
           </motion.p>
 
