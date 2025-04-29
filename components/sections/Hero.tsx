@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import CoffeeBeansBackground from "@/components/CoffeeBeansBackground"; // import the background
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -15,51 +16,8 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center bg-green-100 overflow-hidden"
     >
-      {/* Coffee Beans Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 20 }).map((_, index) => {
-          const randomLeft = Math.random() * 100; // random horizontal start
-          const randomSize = 24 + Math.random() * 24; // random size between 24px and 48px
-          const randomDuration = 20 + Math.random() * 10; // fall speed
-          const randomDelay = Math.random() * 10; // delay start
-
-          return (
-            <motion.div
-              key={index}
-              className="absolute"
-              style={{
-                top: `-10%`, // always start ABOVE the screen
-                left: `${randomLeft}%`,
-                width: `${randomSize}px`,
-                height: `${randomSize}px`,
-              }}
-              initial={{
-                y: 0,
-                rotate: Math.random() * 360,
-                opacity: 0.7,
-              }}
-              animate={{
-                y: "120vh", // fall down beyond view
-                rotate: Math.random() * 360 + 360,
-              }}
-              transition={{
-                duration: randomDuration,
-                delay: randomDelay,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
-              <Image
-                src="/coffeeBean.png" // corrected image name
-                alt="Coffee Bean"
-                width={randomSize}
-                height={randomSize}
-                className="opacity-70"
-              />
-            </motion.div>
-          );
-        })}
-      </div>
+      {/* Coffee Beans */}
+      <CoffeeBeansBackground />
 
       {/* Blurred Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
