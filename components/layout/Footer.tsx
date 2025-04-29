@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="container px-6 flex flex-col sm:flex-row justify-between items-center gap-4 max-w-6xl mx-auto">
           {/* Left: Copyright */}
           <p className="text-sm text-green-100 text-center sm:text-left max-w-[80ch]">
-            © {year} Green Colibri Café.{" "}
+            © {year} Green Colibri Cafe.{" "}
             <Link
               href="https://ace-portfolio-theta.vercel.app/"
               target="_blank"

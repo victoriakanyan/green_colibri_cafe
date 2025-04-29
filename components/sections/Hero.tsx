@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center bg-green-100 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-green-100 overflow-hidden" // Full screen height back
     >
       {/* Blurred Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -25,9 +25,9 @@ export default function Hero() {
       {/* Content */}
       <div className="container relative z-10 flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-12 py-24 gap-12">
         {/* Text Content */}
-        <div className="text-left max-w-xl">
+        <div className="text-left max-w-2xl"> {/* slightly wider */}
           <motion.h1
-            className="text-4xl md:text-6xl font-extrabold text-green-900 leading-tight"
+            className="text-5xl md:text-7xl font-extrabold text-green-900 leading-tight" // Bigger title
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -36,7 +36,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="mt-4 text-lg md:text-xl text-green-800"
+            className="mt-6 text-xl md:text-2xl text-green-800" // Bigger paragraph
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -46,18 +46,19 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            className="mt-8"
+            className="mt-10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <Button
               asChild
-              className="bg-green-700 hover:bg-green-800 text-white shadow-md"
+              size="lg" // Bigger button
+              className="bg-green-700 hover:bg-green-800 text-white shadow-lg text-lg px-8 py-4"
             >
               <Link href="#about">
                 Learn More
-                <ChevronDown className="ml-2 h-4 w-4" />
+                <ChevronDown className="ml-3 h-5 w-5" />
               </Link>
             </Button>
           </motion.div>
