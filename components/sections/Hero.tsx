@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { ChevronDown } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
-  const heroRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null);
 
   return (
     <section
@@ -50,7 +50,10 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Button asChild className="bg-green-700 hover:bg-green-800 text-white">
+            <Button
+              asChild
+              className="bg-green-700 hover:bg-green-800 text-white"
+            >
               <Link href="#about">
                 Learn More
                 <ChevronDown className="ml-2 h-4 w-4" />
@@ -68,7 +71,7 @@ export default function Hero() {
             style={{ transformOrigin: "center center", y: -100, x: 50 }}
           >
             <Image
-              src="/animationCoffeeCup.png"
+              src="./animationCoffeeCup.png"
               alt="Coffee Cup"
               width={600}
               height={600}
@@ -79,5 +82,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
