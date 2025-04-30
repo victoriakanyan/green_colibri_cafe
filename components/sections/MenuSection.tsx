@@ -13,6 +13,10 @@ export default function MenuSection() {
     setHoveredItem((prev) => (prev === id ? null : id));
   };
 
+  const isTouchDevice = () => {
+    return typeof window !== "undefined" && "ontouchstart" in window;
+  };
+
   const coffeeMenu = [
     {
       id: "coffee-1",
@@ -114,14 +118,16 @@ export default function MenuSection() {
                   <div
                     key={item.id}
                     className="relative group"
-                    onMouseEnter={() => setHoveredItem(item.id)}
-                    onMouseLeave={() => setHoveredItem(null)}
+                    onMouseEnter={() =>
+                      !isTouchDevice() && setHoveredItem(item.id)
+                    }
+                    onMouseLeave={() =>
+                      !isTouchDevice() && setHoveredItem(null)
+                    }
                     onClick={() => handleToggle(item.id)}
-                    tabIndex={0}
-                    onFocus={() => setHoveredItem(item.id)}
-                    onBlur={() => setHoveredItem(null)}
+                    className="relative group cursor-pointer"
                   >
-                    <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
+                    <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors">
                       <div className="font-medium text-green-800">
                         {item.title}
                       </div>
@@ -175,14 +181,16 @@ export default function MenuSection() {
                   <div
                     key={item.id}
                     className="relative group"
-                    onMouseEnter={() => setHoveredItem(item.id)}
-                    onMouseLeave={() => setHoveredItem(null)}
+                    onMouseEnter={() =>
+                      !isTouchDevice() && setHoveredItem(item.id)
+                    }
+                    onMouseLeave={() =>
+                      !isTouchDevice() && setHoveredItem(null)
+                    }
                     onClick={() => handleToggle(item.id)}
-                    tabIndex={0}
-                    onFocus={() => setHoveredItem(item.id)}
-                    onBlur={() => setHoveredItem(null)}
+                    className="relative group cursor-pointer"
                   >
-                    <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors cursor-pointer">
+                    <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors">
                       <div className="font-medium text-green-800">
                         {item.title}
                       </div>
