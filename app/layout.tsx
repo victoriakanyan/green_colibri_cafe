@@ -35,9 +35,7 @@ export default function RootLayout({
           {/* 🌿 Scrollable wrapper */}
           <div className="relative w-full min-h-screen">
             {/* 🌱 Coffee Beans Background */}
-            <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none overflow-hidden">
-              <CoffeeBeansBackground count={20} />
-            </div>
+            
 
             {/* 🌼 Main content above */}
             <div className="relative z-10">{children}</div>

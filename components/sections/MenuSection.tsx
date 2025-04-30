@@ -117,7 +117,7 @@ export default function MenuSection() {
                 {coffeeMenu.map((item) => (
                   <div
                     key={item.id}
-                    className="relative group"
+                    className="relative group cursor-pointer"
                     onMouseEnter={() =>
                       !isTouchDevice() && setHoveredItem(item.id)
                     }
@@ -125,7 +125,6 @@ export default function MenuSection() {
                       !isTouchDevice() && setHoveredItem(null)
                     }
                     onClick={() => handleToggle(item.id)}
-                    className="relative group cursor-pointer"
                   >
                     <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors">
                       <div className="font-medium text-green-800">
@@ -180,7 +179,7 @@ export default function MenuSection() {
                 {foodMenu.map((item) => (
                   <div
                     key={item.id}
-                    className="relative group"
+                    className="relative group cursor-pointer"
                     onMouseEnter={() =>
                       !isTouchDevice() && setHoveredItem(item.id)
                     }
@@ -188,7 +187,6 @@ export default function MenuSection() {
                       !isTouchDevice() && setHoveredItem(null)
                     }
                     onClick={() => handleToggle(item.id)}
-                    className="relative group cursor-pointer"
                   >
                     <div className="flex justify-between items-center p-3 rounded-lg hover:bg-green-100 transition-colors">
                       <div className="font-medium text-green-800">

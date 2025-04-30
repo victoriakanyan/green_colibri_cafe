@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import useIsMobile from "@/hooks/use-mobile";
-
+import CoffeeBeansBackground from "../CoffeeBeansBackground";
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
@@ -17,6 +17,9 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center bg-green-100/80 overflow-hidden"
     >
+      <div className="opacity-20 fixed top-0 left-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+              <CoffeeBeansBackground count={20} />
+            </div>
       {/* Blurred Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-green-300 opacity-30 rounded-full blur-3xl" />

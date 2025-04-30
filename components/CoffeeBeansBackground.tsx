@@ -2,21 +2,24 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface BeanConfig {
+  id: number;
   left: number;
   size: number;
   duration: number;
-  delay: number;
   rotation: number;
 }
 
 export default function CoffeeBeansBackground({
   count = 20,
+  interval = 500, // Time between bean releases (ms)
 }: {
   count?: number;
+  interval?: number;
 }) {
+  const [beans, setBeans] = useState<BeanConfig[]>([]);
   const [hasMounted, setHasMounted] = useState(false);
   const reduceMotion = useReducedMotion();
 
@@ -24,24 +27,36 @@ export default function CoffeeBeansBackground({
     setHasMounted(true);
   }, []);
 
-  const beans: BeanConfig[] = useMemo(() => {
-    if (!hasMounted || reduceMotion) return [];
-    return Array.from({ length: count }, () => ({
-      left: Math.random() * 100,
-      size: 24 + Math.random() * 24,
-      duration: 20 + Math.random() * 10,
-      delay: Math.random() * 10,
-      rotation: Math.random() * 360,
-    }));
-  }, [count, hasMounted, reduceMotion]);
+  useEffect(() => {
+    if (!hasMounted || reduceMotion) return;
+
+    let currentCount = 0;
+    let id = 0;
+    const intervalId = setInterval(() => {
+      if (currentCount >= count) return;
+      setBeans(prev => [
+        ...prev,
+        {
+          id: id++,
+          left: Math.random() * 100,
+          size: 24 + Math.random() * 24,
+          duration: 20 + Math.random() * 10,
+          rotation: Math.random() * 360,
+        },
+      ]);
+      currentCount++;
+    }, interval);
+
+    return () => clearInterval(intervalId);
+  }, [count, hasMounted, reduceMotion, interval]);
 
   if (!hasMounted || reduceMotion) return null;
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      {beans.map((bean, index) => (
+      {beans.map((bean) => (
         <motion.div
-          key={index}
+          key={bean.id}
           className="absolute top-[-10%] will-change-transform"
           style={{
             left: `${bean.left}%`,
