@@ -9,6 +9,10 @@ import { useState } from "react";
 export default function MenuSection() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
+  const handleToggle = (id: string) => {
+    setHoveredItem((prev) => (prev === id ? null : id));
+  };
+
   const coffeeMenu = [
     {
       id: "coffee-1",
@@ -112,6 +116,7 @@ export default function MenuSection() {
                     className="relative group"
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
+                    onClick={() => handleToggle(item.id)}
                     tabIndex={0}
                     onFocus={() => setHoveredItem(item.id)}
                     onBlur={() => setHoveredItem(null)}
@@ -172,6 +177,7 @@ export default function MenuSection() {
                     className="relative group"
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
+                    onClick={() => handleToggle(item.id)}
                     tabIndex={0}
                     onFocus={() => setHoveredItem(item.id)}
                     onBlur={() => setHoveredItem(null)}
