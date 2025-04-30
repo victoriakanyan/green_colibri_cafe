@@ -18,12 +18,9 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        {/* Logo */}
+      <div className="flex items-center justify-between w-full px-4 py-3 sm:px-6 lg:px-8">
+        {/* Logo completely aligned to the left edge */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-green-900 text-lg font-bold tracking-wide hidden sm:inline">
-            Green Colibri
-          </span>
           <Image
             src="/greenColBird.png"
             alt="Green Colibri Logo"

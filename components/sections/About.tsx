@@ -2,6 +2,7 @@
 
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function About() {
   return (
@@ -11,7 +12,7 @@ export default function About() {
           {/* Text Content */}
           <FadeInWhenVisible>
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-green-800 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-green-800 leading-tight">
                 About Green Colibri Cafe
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
@@ -28,15 +29,22 @@ export default function About() {
 
           {/* Image Content */}
           <FadeInWhenVisible delay={0.3}>
-            <div className="relative w-full h-[400px] overflow-hidden rounded-lg shadow-lg group">
-              <Image
-                src="/greenColCaf6.jpg"
-                alt="Inside the Green Colibri Cafe"
-                fill
-                className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="flex justify-end"
+            >
+              <div className="relative w-[500px] h-[500px] rounded-full overflow-hidden shadow-lg group">
+                <Image
+                  src="/greenColLogo2.png"
+                  alt="Inside the Green Colibri Cafe"
+                  fill
+                  className="object-contain transition-transform duration-500 ease-in-out"
+                  loading="lazy"
+                />
+              </div>
+            </motion.div>
           </FadeInWhenVisible>
         </div>
       </div>
